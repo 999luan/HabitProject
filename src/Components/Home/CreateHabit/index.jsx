@@ -1,9 +1,15 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+
+import { useNavigation } from "@react-navigation/native";
+
 export default function CreateHabit({ habitArea, borderColor }) {
+  const navigation = useNavigation();
+
   function handleCreate() {
-    console.log(`botao da area clicado: ${habitArea}`);
+    console.log("Clicar para criar");
   }
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
