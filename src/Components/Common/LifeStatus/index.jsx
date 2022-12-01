@@ -42,18 +42,19 @@ const styles = StyleSheet.create({
   },
   roboAnimacao: {
     width: 190,
-    marginTop: 30,
+    marginTop: 20,
     marginLeft: 25,
+    zIndex: -1,
   },
   educacaoAnimacao: {
     width: 100,
-    marginTop: 50,
+    marginTop: 80,
     marginLeft: 5,
     position: "absolute",
   },
   financasAnimacao: {
     width: 100,
-    marginTop: 50,
+    marginTop: 80,
     marginLeft: 95,
     position: "absolute",
   },

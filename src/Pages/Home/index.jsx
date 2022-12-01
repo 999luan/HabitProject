@@ -113,7 +113,7 @@ export default function Home({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(21, 21, 21, 0.98)",
+    backgroundColor: "#17022B",
   },
   dailyChecks: {
     color: "white",
