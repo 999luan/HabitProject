@@ -42,11 +42,12 @@ export default function AppExplanation() {
           </Text>
           <ExplanationCard />
           <Text style={styles.descriptionCta}>
-            Prontx para subir de nivel na vida?
+            Prontx para melhorar seu ser?
           </Text>
           <Text style={styles.description}>
             Na próxima tela você vai poder escolher {"\n"} seus 4 habitos de
-            forma individual.
+            forma individual.{"\n"} Cultive um nucleo ao assimilar habitos{"\n"}{" "}
+            e purifique até que brilhe como sua alma!
           </Text>
           <DefaultButton
             buttonText={"Continuar"}

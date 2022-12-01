@@ -4,8 +4,8 @@ export default function ExplanationCard() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        Através deste APP você vai consolidar {"\n"} 4 hábitos de àreas
-        fundamentais:
+        Através deste APP você vai cultivar {"\n"} 4 tipos de hábitos para o seu
+        desenvolvimento
       </Text>
 
       <View style={styles.explanationContainer}>
@@ -15,7 +15,7 @@ export default function ExplanationCard() {
         />
         <Text style={styles.description}>
           <Text style={styles.mind}>Mente:</Text> Hábitos para melhorar sua
-          inteligência/sabedoria
+          inteligência/sabedoria.
         </Text>
       </View>
 
@@ -26,7 +26,7 @@ export default function ExplanationCard() {
         />
         <Text style={styles.description}>
           <Text style={styles.money}>Financeiro:</Text> Hábitos para te ajudar
-          com controle financeiro
+          com controle financeiro e prosperidade.
         </Text>
       </View>
 
