@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -27,6 +28,7 @@ export default function HabitPage({ route }) {
   const [timeNotification, setTimeNotification] = useState();
 
   const { create, habit } = route.params;
+
   const habitCreated = new Date();
   const formatDate = `${habitCreated.getFullYear()}-${
     habitCreated.getMonth() + 1

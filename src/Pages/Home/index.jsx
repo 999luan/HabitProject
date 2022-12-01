@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import HabitsService from "../../Services/HabitsService";
+import { useNavigation } from "@react-navigation/native";
 import LifeStatus from "../../Components/Common/LifeStatus";
 import StatusBar from "../../Components/Home/StatusBar";
 import CreateHabit from "../../Components/Home/CreateHabit";
@@ -21,6 +21,7 @@ export default function Home({ route }) {
   function handleNavExplanation() {
     navigation.navigate("AppExplanation");
   }
+  const excludeArea = route.params?.excludeArea;
 
   useEffect(() => {
     HabitsService.findByArea("Mente").then((mind) => {
@@ -35,6 +36,21 @@ export default function Home({ route }) {
     HabitsService.findByArea("Humor").then((fun) => {
       setFunHabit(fun[0]);
     });
+
+    if (excludeArea) {
+      if (excludeArea == "Mente") {
+        setMindHabit(null);
+      }
+      if (excludeArea == "Financeiro") {
+        setMoneyHabit(null);
+      }
+      if (excludeArea == "Corpo") {
+        setBodyHabit(null);
+      }
+      if (excludeArea == "Humor") {
+        setFunHabit(null);
+      }
+    }
 
     ChangeNavigationService.checkShowHome(1)
       .then((showHome) => {
