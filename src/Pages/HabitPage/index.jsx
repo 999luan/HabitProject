@@ -8,7 +8,7 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-
+import * as Notifications from "expo-notifications";
 import { useNavigation } from "@react-navigation/native";
 
 import SelectHabit from "../../Components/HabitPage/SelectHabit";
@@ -18,6 +18,7 @@ import TimeDatePicker from "../../Components/HabitPage/TimeDataPicker";
 import UpdateExcludeButtons from "../../Components/HabitPage/UpdateExcludeButtons";
 import DefaultButton from "../../Components/Common/DefaultButton";
 import HabitsService from "../../Services/HabitsService";
+import NotificationService from "../../Services/NotificationService";
 
 export default function HabitPage({ route }) {
   const navigation = useNavigation();
@@ -26,7 +27,6 @@ export default function HabitPage({ route }) {
   const [notificationToggle, setNotificationToggle] = useState();
   const [dayNotification, setDayNotification] = useState();
   const [timeNotification, setTimeNotification] = useState();
-
   const { create, habit } = route.params;
 
   const habitCreated = new Date();
@@ -34,6 +34,84 @@ export default function HabitPage({ route }) {
     habitCreated.getMonth() + 1
   }-${habitCreated.getDate()}`;
 
+  // Notification Creation
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+    }),
+  });
+
+  function handleUpdateHabit() {
+    if (notificationToggle === true && !dayNotification && !timeNotification) {
+      Alert.alert("Você precisa colocar a frequência e horário da notificação");
+    } else {
+      HabitsService.updateHabit({
+        habitArea: habitArea,
+        habitName: habitInput,
+        habitFrequency: frequencyInput,
+        habitHasNotification: notificationToggle,
+        habitNotificationFrequency: dayNotification,
+        habitNotificationTime: timeNotification,
+        habitNotificationId: notificationToggle ? habitInput : null,
+      }).then(() => {
+        Alert.alert("Sucesso na atualização do hábito");
+        if (!notificationToggle) {
+          NotificationService.deleteNotification(habitInput);
+        } else {
+          NotificationService.createNotification(
+            habitInput,
+            frequencyInput,
+            dayNotification,
+            timeNotification
+          );
+        }
+        navigation.navigate("Home", {
+          updatedHabit: `Updated in ${habitArea}`,
+        });
+      });
+    }
+  }
+
+  useEffect(() => {
+    if (habit?.habitHasNotification == 1) {
+      setNotificationToggle(true);
+      setDayNotification(habit?.habitNotificationFrequency);
+      setTimeNotification(habit?.habitNotificationTime);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (notificationToggle === false) {
+      setTimeNotification(null);
+      setDayNotification(null);
+    }
+  }, [notificationToggle]);
+
+  // Notification Get Token
+  useEffect(() => {
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
+        setNotification(notification);
+      });
+
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        console.log(response);
+      });
+
+    return () => {
+      Notifications.removeNotificationSubscription(
+        notificationListener.current
+      );
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
   function handleCreateHabit() {
     if (habitInput === undefined || frequencyInput === undefined) {
       Alert.alert(
@@ -55,6 +133,14 @@ export default function HabitPage({ route }) {
         "Você precisa dizer a frequência e o horário da notificação!"
       );
     } else {
+      if (notificationToggle) {
+        NotificationService.createNotification(
+          habitInput,
+          frequencyInput,
+          dayNotification,
+          timeNotification
+        );
+      }
       HabitsService.createHabit({
         habitArea: habit?.habitArea,
         habitName: habitInput,
