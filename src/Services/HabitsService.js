@@ -8,9 +8,6 @@ db.transaction((tx) => {
       console.log(error);
     }
   );
-  // tx.executeSql("DROP TABLE change_navigation;", [], () => {
-  //   console.log("Tabela deletada");
-  // });
 });
 
 const createHabit = (obj) => {
@@ -109,7 +106,6 @@ const changeProgress = (obj) => {
     });
   });
 };
-
 export default {
   createHabit,
   findByArea,

@@ -17,7 +17,6 @@ function animationStatus(
     setMoney("");
     setRobot(require("../assets/robot/robot-00-00.json"));
   } else {
-    // Mudança da imagem da mente
     if (mindHabit === 0.5) {
       setMind(require("../assets/education/education-50.json"));
     } else if (mindHabit === 0.25) {
@@ -25,7 +24,7 @@ function animationStatus(
     } else {
       setMind(require("../assets/education/education-1.json"));
     }
-    // Mudança da imagem do dinheiro
+
     if (moneyHabit === 0.5) {
       setMoney(require("../assets/money/money-50.json"));
     } else if (moneyHabit === 0.25) {
@@ -33,8 +32,6 @@ function animationStatus(
     } else {
       setMoney(require("../assets/money/money-100.json"));
     }
-
-    // Mudança da imagem do robo (Corpo e diversão)
     if (bodyHabit === 0.25 && funHabit === undefined) {
       setRobot(require("../assets/robot/robot-100-25.json"));
     } else if (bodyHabit === 0.5 && funHabit === undefined) {

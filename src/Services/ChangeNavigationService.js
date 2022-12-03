@@ -28,6 +28,7 @@ const setShowHome = (obj) => {
     });
   });
 };
+
 const checkShowHome = (id) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
