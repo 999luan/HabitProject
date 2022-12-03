@@ -32,7 +32,7 @@ export default function HabitPage({ route }) {
   const habitCreated = new Date();
   const formatDate = `${habitCreated.getFullYear()}-${
     habitCreated.getMonth() + 1
-  }-${habitCreated.getDate()}`;
+  }-${habitCreated.getDate(0)}`;
 
   // Notification Creation
   const [notification, setNotification] = useState(false);
