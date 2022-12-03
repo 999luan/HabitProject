@@ -83,7 +83,7 @@ export default function Home({ route }) {
       })
       .catch((err) => console.log(err));
   }, [route.params]);
-  console.log({ mindHabit });
+
   useEffect(() => {
     CheckService.removeCheck(mindHabit, moneyHabit, bodyHabit, funHabit);
     CheckService.checkStatus(mindHabit, moneyHabit, bodyHabit, funHabit);
