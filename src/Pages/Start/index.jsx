@@ -36,11 +36,11 @@ export default function Start() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(21,21,21,0.98)",
+    backgroundColor: "black",
   },
   logo: {
     width: 300,
-    height: 60,
+    height: 95,
     marginTop: 60,
     marginBotton: 20,
   },
