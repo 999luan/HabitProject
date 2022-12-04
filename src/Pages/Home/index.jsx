@@ -112,7 +112,9 @@ export default function Home({ route }) {
               {checks} {checks === 1 ? "Check" : "Checks"}
             </Text>
           ) : (
-            <Text style={styles.gameOverTitle}>Game Over</Text>
+            <Text style={styles.gameOverTitle}>
+              Nucleo prestes a se partir!{" "}
+            </Text>
           )}
 
           <LifeStatus
